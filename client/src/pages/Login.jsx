@@ -1,10 +1,15 @@
 import { useState } from 'react';
 
 function Login() {
-  const [fromData, setFromData] = useState({ Username: '', Password: '' });
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    console.log(formData);
+  };
 
   const submitData = (e) => {
-    e.prevent;
+    e.preventDefault();
   };
 
   return (
@@ -22,8 +27,8 @@ function Login() {
               type='text'
               id='username'
               name='username'
-              value={fromData.Username}
               className='w-full px-4 py-2 rounded-md bg-white bg-opacity-25 text-black focus:outline-none focus:bg-opacity-50'
+              onChange={handleChange}
               required
             />
           </div>
@@ -32,11 +37,11 @@ function Login() {
               Password
             </label>
             <input
-              value={fromData.Password}
               type='password'
               id='password'
               name='password'
               className='w-full px-4 py-2 rounded-md bg-white bg-opacity-25 text-black focus:outline-none focus:bg-opacity-50'
+              onChange={handleChange}
               required
             />
           </div>
