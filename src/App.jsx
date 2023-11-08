@@ -23,76 +23,101 @@ import {
   Editor,
   Line,
   ColorMapping,
+  Login,
 } from './pages';
-import { useStateContext } from './context/ContextProvider';
 
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import store from './store/store';
+import {
+  selectMenu,
+  selectMode,
+  selectTheme,
+  selectfeature,
+  setThemeSettings,
+} from './features/featuresSclice';
+import Maps from './pages/ColorPicker';
 const App = () => {
-  const { activeMenu } = useStateContext();
-
+  const dispatch = useDispatch();
+  const themeSettings = useSelector(selectTheme);
+  const activeMenu = useSelector(selectMenu);
+  const currentColor = useSelector(selectfeature);
+  const currentMode = useSelector(selectMode);
   return (
-    <BrowserRouter>
-      <div className='flex relative dark:bg-main-dark-bg'>
-        <div className='fixed right-4 bottom-4' style={{ zIndex: '1000' }}>
-          <TooltipComponent content='Settings' position='Top'>
-            <button
-              type='button'
-              className='text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white '
-              style={{ backgroundColor: 'blue', borderRadius: '50%' }}
-            >
-              <FiSettings />
-            </button>
-          </TooltipComponent>
-        </div>
-        {activeMenu ? (
-          <div className='w-72  fixed sidebar dark:bg-secondary-dark-bg bg-white  '>
-            <Sidebar />
-          </div>
-        ) : (
-          <div className='w-0 dark:bg-secondary-dark-bg '>
-            <Sidebar />
-          </div>
-        )}
-        <div
-          className={`dark:bg-main-dark-bg  bg-main-bg min-h-screen w-full
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className='flex relative dark:bg-main-dark-bg'>
+            <div className='fixed right-4 bottom-4' style={{ zIndex: '1000' }}>
+              <TooltipComponent content='Settings' position='Top'>
+                <button
+                  onClick={() => dispatch(setThemeSettings(true))}
+                  type='button'
+                  className='text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white '
+                  style={{ backgroundColor: currentColor, borderRadius: '50%' }}
+                >
+                  <FiSettings />
+                </button>
+              </TooltipComponent>
+            </div>
+            {activeMenu ? (
+              <div className='w-72  fixed sidebar dark:bg-secondary-dark-bg bg-white  '>
+                <Sidebar />
+              </div>
+            ) : (
+              <div className='w-0 dark:bg-secondary-dark-bg '>
+                <Sidebar />
+              </div>
+            )}
+            <div
+              className={`dark:bg-main-dark-bg  bg-main-bg min-h-screen w-full
             ${activeMenu ? ' md:ml-72 ' : 'flex-2'}`}
-        >
-          <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar dark:bg-main-dark-bg navbar w-full '>
-            <Navbar />
+            >
+              <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar dark:bg-main-dark-bg navbar w-full '>
+                <Navbar />
+              </div>
+              <div>
+                {themeSettings && <ThemeSettings />}
+
+                <Routes>
+                  {/* Dashboard  */}
+                  <Route path='/' element={<Ecommerce />} />
+                  <Route path='/ecommerce' element={<Ecommerce />} />
+
+                  {/* Pages */}
+
+                  <Route path='/orders' element={<Orders />} />
+                  <Route path='/employees' element={<Employees />} />
+                  <Route path='/customers' element={<Customers />} />
+
+                  {/* Apps */}
+
+                  <Route path='/tasks' element={<Tasks />} />
+                  <Route path='/editor' element={<Editor />} />
+                  <Route path='/calendar' element={<Calendar />} />
+                  <Route path='/color-picker' element={<Maps />} />
+
+                  {/* Charts */}
+
+                  <Route path='/line' element={<Line />} />
+                  <Route path='/area' element={<Area />} />
+                  <Route path='/bar' element={<Bar />} />
+                  <Route path='/pie' element={<Pie />} />
+                  <Route path='/financial' element={<Financial />} />
+                  <Route path='/colormapping' element={<ColorMapping />} />
+                  <Route path='/pyramid' element={<Pyramid />} />
+                  <Route path='/stacked' element={<Stacked />} />
+                </Routes>
+
+                <Routes>
+                  {/* Authantication  */}
+                  <Route path='/auth0/login' element={<Login />} />
+                </Routes>
+              </div>
+            </div>
           </div>
-          <div>
-            <Routes>
-              {/* Dashboard  */}
-              <Route path='/' element={<Ecommerce />} />
-              <Route path='/ecommerce' element={<Ecommerce />} />
-
-              {/* Pages */}
-
-              <Route path='/orders' element={<Orders />} />
-              <Route path='/employees' element={<Employees />} />
-              <Route path='/customers' element={<Customers />} />
-
-              {/* Apps */}
-
-              <Route path='/tasks' element={<Tasks />} />
-              <Route path='/editor' element={<Editor />} />
-              <Route path='/calendar' element={<Calendar />} />
-              <Route path='/color-picker' element={<ColorPicker />} />
-
-              {/* Charts */}
-
-              <Route path='/line' element={<Line />} />
-              <Route path='/area' element={<Area />} />
-              <Route path='/bar' element={<Bar />} />
-              <Route path='/pie' element={<Pie />} />
-              <Route path='/financial' element={<Financial />} />
-              <Route path='/color-mapping' element={<ColorMapping />} />
-              <Route path='/pyramid' element={<Pyramid />} />
-              <Route path='/stacked' element={<Stacked />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
-    </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
+    </div>
   );
 };
 

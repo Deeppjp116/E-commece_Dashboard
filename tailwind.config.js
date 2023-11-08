@@ -48,6 +48,9 @@ module.exports = {
         // 'hero-pattern':
         //   "url('https://i.ibb.co/vL0Zkd8/front-view-woman-with-shopping-bag-concept.jpg')",
         'hero-pattern': "url('https://i.ibb.co/djHcMJV/banner.jpg')",
+        // 'login-pattern':
+        //   "url('https://i.ibb.co/2yGZWFv/106584-blue-and-white-abstract.jpg')",
+        'login-pattern': "url('https://i.ibb.co/qDDkgmw/loginbg.png')",
       },
     },
   },

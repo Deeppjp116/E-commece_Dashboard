@@ -7,6 +7,7 @@ import {
   Category,
   StackingColumnSeries,
   Tooltip,
+  DataLabel,
 } from '@syncfusion/ej2-react-charts';
 
 import {
@@ -14,10 +15,12 @@ import {
   stackedPrimaryXAxis,
   stackedPrimaryYAxis,
 } from '../../data/dummy';
-import { useStateContext } from '../../context/ContextProvider';
+
+import { useDispatch } from 'react-redux';
+import { selectMode } from '../../features/featuresSclice';
 
 const Stacked = ({ width, height }) => {
-  const { currentMode } = useStateContext();
+  const currentMode = useDispatch(selectMode);
   return (
     <ChartComponent
       id='charts'
@@ -30,10 +33,18 @@ const Stacked = ({ width, height }) => {
       background={currentMode === 'Dark' ? '#33373E' : '#fff'}
       legendSettings={{ background: 'white' }}
     >
-      <Inject services={[Legend, Category, StackingColumnSeries, Tooltip]} />
+      <Inject
+        services={[Legend, DataLabel, Category, StackingColumnSeries, Tooltip]}
+      />
       <SeriesCollectionDirective>
         {stackedCustomSeries.map((item, index) => {
-          return <SeriesDirective key={index} {...item} />;
+          return (
+            <SeriesDirective
+              key={index}
+              {...item}
+              marker={{ dataLabel: { visible: true } }}
+            />
+          );
         })}
       </SeriesCollectionDirective>
     </ChartComponent>

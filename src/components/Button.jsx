@@ -16,12 +16,14 @@ const Button = ({
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'exported_data.xlsx');
   };
+  
+  const bgColors = `rgb(${bgColor.r}, ${bgColor.b}, ${bgColor.g})`;
 
   return (
     <button
       type='button'
       style={{
-        backgroundColor: `rgb(${bgColor.r}, ${bgColor.g}, ${bgColor.b})`,
+        backgroundColor: bgColors,
         color: color,
         borderRadius: borderRadius,
       }}
