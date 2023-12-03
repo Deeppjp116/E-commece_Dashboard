@@ -16,6 +16,7 @@ import {
   FiStar,
   FiShoppingCart,
 } from 'react-icons/fi';
+import { RiBillLine } from 'react-icons/ri';
 import {
   BsKanban,
   BsBarChart,
@@ -194,6 +195,7 @@ export const barPrimaryYAxis = {
   lineStyle: { width: 0 },
   labelStyle: { color: 'transparent' },
 };
+
 const areaChartData = [
   [
     { x: new Date(2002, 0, 1), y: 2.2 },
@@ -443,22 +445,177 @@ export const Polardata = [
   { x: 'Dec', y: 34 },
 ];
 
+export const BillingData = [
+  {
+    CustomerID: 1001,
+    CustomerName: 'Nirav Joshi',
+    CustomerEmail: 'nirav@gmail.com',
+    MobileNumber: '+1234567890',
+    bill: '200',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1002,
+    CustomerName: 'Deep Prajapati',
+    CustomerEmail: 'deep@1234.com',
+    MobileNumber: '+2891328837',
+    bill: '300',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1003,
+    CustomerName: 'Rohan Soni',
+    CustomerEmail: 'rohan@1345.com',
+    MobileNumber: '+83925872083',
+    bill: '748',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1004,
+    CustomerName: 'Harsh Soni',
+    CustomerEmail: 'harshsoni@2321.com',
+    MobileNumber: '+1234567890',
+    bill: '38429',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1005,
+    CustomerName: 'shubham Soni',
+    CustomerEmail: 'shubhamsoni@1332.com',
+    MobileNumber: '+53498589',
+    bill: '89347',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1005,
+    CustomerName: 'Rahul Patel',
+    CustomerEmail: 'nirav@gmail.com',
+    MobileNumber: '+1234567890',
+    bill: '234',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1006,
+    CustomerName: 'Sneh Patel',
+    CustomerEmail: 'sneh@3242.com',
+    MobileNumber: '+3894792387',
+    bill: '256',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1007,
+    CustomerName: 'Ammit vagela ',
+    CustomerEmail: 'amitvagela@323.com',
+    MobileNumber: '+95803458',
+    bill: '267',
+    Location: 'India',
+  },
+  {
+    CustomerID: 1001,
+    CustomerName: 'Nirav Joshi',
+    CustomerEmail: 'nirav@gmail.com',
+    MobileNumber: '+1234567890',
+    bill: '200',
+    Location: 'India',
+  },
+];
+
+export const inflationRates = [
+  { year: 2015, rate: 1.9, gdp: 10, state: 'Mahrashtra', growth: 20 },
+  { year: 2016, rate: 2.1, gdp: 9, state: 'Madhyapradesh', growth: 20 },
+  { year: 2017, rate: 2.3, gdp: 8, state: 'Delhi', growth: 60 },
+  { year: 2018, rate: 1.5, gdp: 7, state: 'Mumbai', growth: 80 },
+  { year: 2019, rate: 1.8, gdp: 6, state: 'Kolkatta', growth: 70 },
+  { year: 2020, rate: 1.2, gdp: 7, state: 'Beglore', growth: 30 },
+  { year: 2021, rate: 2.5, gdp: 4, state: 'Bihar', growth: 50 },
+  { year: 2022, rate: 1.8, gdp: 4, state: 'Goa', growth: 40 },
+  { year: 2023, rate: 2.0, gdp: 7, state: 'Assam', growth: 30 },
+];
+
+export const inflationRatesGrid = [
+  {
+    field: 'year',
+    headerText: 'Year',
+  },
+  {
+    field: 'rate',
+    headerText: 'Rate',
+    width: '100',
+  },
+  {
+    field: 'gdp',
+    headerText: 'GDP',
+    width: '100px',
+  },
+
+  {
+    field: 'state',
+    headerText: 'States',
+    width: '100px',
+  },
+  {
+    field: 'growth',
+    headerText: 'Growth(%)',
+    width: '100px',
+  },
+];
+
+export const BillingGrid = [
+  { type: 'checkbox', width: '50' },
+  {
+    field: 'CustomerID',
+    headerText: 'CustomerID',
+    width: '150',
+    textAlign: 'Center',
+  },
+  {
+    field: 'CustomerName',
+    headerText: 'CustomerName',
+    width: '150',
+    textAlign: 'Center',
+  },
+  {
+    field: 'CustomerEmail',
+    headerText: 'CustomerEmail',
+    width: '150',
+    textAlign: 'Center',
+  },
+  {
+    field: 'MobileNumber',
+    headerText: 'MobileNumber',
+    width: '150',
+    textAlign: 'Center',
+  },
+  {
+    field: 'bill',
+    headerText: 'bill',
+    width: '150',
+    textAlign: 'Center',
+  },
+  {
+    field: 'Location',
+    headerText: 'Location',
+    width: '150',
+    textAlign: 'Center',
+  },
+];
+
 export const customersGrid = [
   { type: 'checkbox', width: '50' },
   {
-    headerText: 'Name',
+    headerText: 'CustomerID',
     width: '150',
     template: customerGridImage,
     textAlign: 'Center',
   },
   {
-    field: 'ProjectName',
+    field: 'CustomerName',
     headerText: 'Project Name',
     width: '150',
     textAlign: 'Center',
   },
   {
-    field: 'Status',
+    field: 'CustomerEmail',
     headerText: 'Status',
     width: '130',
     format: 'yMd',
@@ -563,6 +720,10 @@ export const links = [
       {
         name: 'customers',
         icon: <RiContactsLine />,
+      },
+      {
+        name: 'Billing',
+        icon: <RiBillLine />,
       },
     ],
   },
@@ -3015,7 +3176,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[0],
     xName: 'x',
     yName: 'y',
-    name: 'Germany',
+    name: 'Gujrat',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
     type: 'Line',
@@ -3025,7 +3186,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[1],
     xName: 'x',
     yName: 'y',
-    name: 'England',
+    name: 'Maharashtra',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
     type: 'Line',
@@ -3035,7 +3196,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[2],
     xName: 'x',
     yName: 'y',
-    name: 'India',
+    name: 'Mumbai',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
     type: 'Line',

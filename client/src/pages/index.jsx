@@ -15,3 +15,5 @@ export { default as Pie } from './Charts/Pie';
 export { default as Pyramid } from './Charts/Pyramid';
 export { default as Stacked } from './Charts/Stackd';
 export { default as Login } from './Login';
+export { default as Registration } from './Registration';
+export { default as Billing } from './Billing';
