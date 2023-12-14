@@ -62,7 +62,7 @@ export const gridOrderStatus = (props) => (
     style={{ background: props.StatusBg }}
     className='text-white py-1 px-2 capitalize rounded-2xl text-md'
   >
-    {props.Status}
+    {props.OrderStatus}
   </button>
 );
 
@@ -240,7 +240,7 @@ export const areaCustomSeries = [
     dataSource: areaChartData[0],
     xName: 'x',
     yName: 'y',
-    name: 'USA',
+    name: 'Gujrat',
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
@@ -249,7 +249,7 @@ export const areaCustomSeries = [
     dataSource: areaChartData[1],
     xName: 'x',
     yName: 'y',
-    name: 'France',
+    name: 'Maharashra',
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
@@ -258,7 +258,7 @@ export const areaCustomSeries = [
     dataSource: areaChartData[2],
     xName: 'x',
     yName: 'y',
-    name: 'Germany',
+    name: 'Delhi',
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
@@ -563,38 +563,40 @@ export const inflationRatesGrid = [
 export const BillingGrid = [
   { type: 'checkbox', width: '50' },
   {
-    field: 'CustomerID',
-    headerText: 'CustomerID',
+    field: 'name',
+    headerText: 'Product Name',
     width: '150',
     textAlign: 'Center',
   },
   {
-    field: 'CustomerName',
-    headerText: 'CustomerName',
+    field: 'description',
+    headerText: 'description',
     width: '150',
     textAlign: 'Center',
   },
   {
-    field: 'CustomerEmail',
-    headerText: 'CustomerEmail',
+    field: 'ProductId',
+    headerText: 'ProductId',
+    width: '150',
+    textAlign: 'Center',
+  },
+
+  {
+    field: 'price',
+    headerText: 'Price',
+    width: '150',
+    textAlign: 'Center',
+    format: '$ 00',
+  },
+  {
+    field: 'rating',
+    headerText: 'Rating',
     width: '150',
     textAlign: 'Center',
   },
   {
-    field: 'MobileNumber',
-    headerText: 'MobileNumber',
-    width: '150',
-    textAlign: 'Center',
-  },
-  {
-    field: 'bill',
-    headerText: 'bill',
-    width: '150',
-    textAlign: 'Center',
-  },
-  {
-    field: 'Location',
-    headerText: 'Location',
+    field: 'supply',
+    headerText: 'in Stock',
     width: '150',
     textAlign: 'Center',
   },
@@ -603,19 +605,23 @@ export const BillingGrid = [
 export const customersGrid = [
   { type: 'checkbox', width: '50' },
   {
-    headerText: 'CustomerID',
-    width: '150',
-    template: customerGridImage,
-    textAlign: 'Center',
+    field: 'CustomerID',
+    headerText: 'ID',
   },
   {
     field: 'CustomerName',
-    headerText: 'Project Name',
+    headerText: 'Customer Name',
     width: '150',
     textAlign: 'Center',
   },
   {
     field: 'CustomerEmail',
+    headerText: 'Email',
+    width: '130',
+    textAlign: 'Center',
+  },
+  {
+    field: 'Status',
     headerText: 'Status',
     width: '130',
     format: 'yMd',
@@ -633,8 +639,8 @@ export const customersGrid = [
     field: 'Budget',
     headerText: 'Budget',
     width: '100',
-    format: 'yMd',
     textAlign: 'Center',
+    format: '$ 000',
   },
 
   {
@@ -642,14 +648,6 @@ export const customersGrid = [
     headerText: 'Location',
     width: '150',
     textAlign: 'Center',
-  },
-
-  {
-    field: 'CustomerID',
-    headerText: 'Customer ID',
-    width: '120',
-    textAlign: 'Center',
-    isPrimaryKey: true,
   },
 ];
 
@@ -722,7 +720,7 @@ export const links = [
         icon: <RiContactsLine />,
       },
       {
-        name: 'Billing',
+        name: 'products',
         icon: <RiBillLine />,
       },
     ],
@@ -1086,26 +1084,20 @@ export const userProfileData = [
 
 export const ordersGrid = [
   {
-    headerText: 'Image',
-    template: gridOrderImage,
+    field: 'Customer',
+    headerText: 'Active Customers',
     textAlign: 'Center',
     width: '120',
   },
   {
-    field: 'OrderItems',
-    headerText: 'Item',
+    field: 'Location',
+    headerText: 'City',
     width: '150',
     editType: 'dropdownedit',
     textAlign: 'Center',
   },
   {
-    field: 'CustomerName',
-    headerText: 'Customer Name',
-    width: '150',
-    textAlign: 'Center',
-  },
-  {
-    field: 'TotalAmount',
+    field: 'AmountTotal',
     headerText: 'Total Amount',
     format: 'C2',
     textAlign: 'Center',
@@ -1113,22 +1105,21 @@ export const ordersGrid = [
     width: '150',
   },
   {
-    headerText: 'Status',
+    field: 'OrderStatus',
+    headerText: 'Order Status',
     template: gridOrderStatus,
-    field: 'OrderItems',
     textAlign: 'Center',
     width: '120',
   },
   {
-    field: 'OrderID',
+    field: 'Order',
     headerText: 'Order ID',
     width: '120',
     textAlign: 'Center',
   },
-
   {
-    field: 'Location',
-    headerText: 'Location',
+    field: 'products',
+    headerText: 'Products ID',
     width: '150',
     textAlign: 'Center',
   },
@@ -3204,13 +3195,13 @@ export const lineCustomSeries = [
 ];
 
 export const pieChartData = [
-  { x: 'Labour', y: 18, text: '18%' },
-  { x: 'Legal', y: 8, text: '8%' },
-  { x: 'Production', y: 15, text: '15%' },
+  { x: 'Milk', y: 18, text: '18%' },
+  { x: 'Banana', y: 8, text: '8%' },
+  { x: 'Apple', y: 15, text: '15%' },
   { x: 'License', y: 11, text: '11%' },
-  { x: 'Facilities', y: 18, text: '18%' },
-  { x: 'Taxes', y: 14, text: '14%' },
-  { x: 'Insurance', y: 16, text: '16%' },
+  { x: 'Vegitables', y: 18, text: '18%' },
+  { x: 'buttermilk', y: 14, text: '14%' },
+  { x: 'Gvava', y: 16, text: '16%' },
 ];
 
 export const contextMenuItems = [
@@ -3230,6 +3221,103 @@ export const contextMenuItems = [
   'PrevPage',
   'LastPage',
   'NextPage',
+];
+export const Colormapingdata = [
+  { competition: 'Relaince', income: 312 },
+  { competition: 'Tata', income: 8 },
+  { competition: 'Blinkit', income: 4 },
+  { competition: 'Flipkart', income: 23 },
+  { competition: 'Amazon', income: 122 },
+];
+
+export const ColorMapingGride = [
+  {
+    field: 'competition',
+    headerText: 'Compition in Market',
+  },
+  { field: 'Income', headerText: 'sales per Moth' },
+];
+
+export const literacyRates = [
+  { state: 'Goa', literacyRate: 74.04, year: 2021 },
+  { state: 'Andhra Pradesh', literacyRate: 67.4, year: 2021 },
+  { state: 'Arunachal Pradesh', literacyRate: 79.8, year: 2021 },
+  { state: 'Assam', literacyRate: 72.2, year: 2021 },
+  { state: 'Bihar', literacyRate: 63.8, year: 2021 },
+  { state: 'Chhattisgarh', literacyRate: 71.3, year: 2021 },
+  { state: 'Goa', literacyRate: 88.7, year: 2021 },
+  { state: 'Gujarat', literacyRate: 79.3, year: 2021 },
+  { state: 'Haryana', literacyRate: 82.2, year: 2021 },
+  { state: 'Himachal Pradesh', literacyRate: 87.4, year: 2021 },
+  { state: 'Jharkhand', literacyRate: 69.3, year: 2021 },
+  { state: 'Karnataka', literacyRate: 76.2, year: 2021 },
+  { state: 'Kerala', literacyRate: 94.0, year: 2021 },
+  { state: 'Madhya Pradesh', literacyRate: 70.6, year: 2021 },
+  { state: 'Maharashtra', literacyRate: 83.2, year: 2021 },
+  { state: 'Manipur', literacyRate: 81.1, year: 2021 },
+  { state: 'Meghalaya', literacyRate: 75.1, year: 2021 },
+  { state: 'Mizoram', literacyRate: 91.6, year: 2021 },
+  { state: 'Nagaland', literacyRate: 78.9, year: 2021 },
+  { state: 'Odisha', literacyRate: 73.5, year: 2021 },
+  { state: 'Punjab', literacyRate: 81.4, year: 2021 },
+  { state: 'Rajasthan', literacyRate: 66.1, year: 2021 },
+  { state: 'Sikkim', literacyRate: 85.3, year: 2021 },
+  { state: 'Tamil Nadu', literacyRate: 80.3, year: 2021 },
+  { state: 'Telangana', literacyRate: 72.8, year: 2021 },
+  { state: 'Tripura', literacyRate: 87.2, year: 2021 },
+  { state: 'Uttar Pradesh', literacyRate: 68.2, year: 2021 },
+  { state: 'Uttarakhand', literacyRate: 79.6, year: 2021 },
+  { state: 'West Bengal', literacyRate: 77.8, year: 2021 },
+];
+export const PieData = [
+  { store: 'Milk', Rate: 23.032, inStoke: 12 },
+  { store: 'Banana', Rate: 45, inStoke: 4 },
+  { store: 'Apple', Rate: 45, inStoke: 6 },
+  { store: 'Orange', Rate: 56, inStoke: 17 },
+  { store: 'Vegitables', Rate: 67, inStoke: 23 },
+  { store: 'Choklate', Rate: 34, inStoke: 2 },
+  { store: 'buttermilk', Rate: 34, inStoke: 12 },
+  { store: 'coco', Rate: 43, inStoke: 76 },
+  { store: 'Gvava', Rate: 34, inStoke: 56 },
+  { store: 'Grapes', Rate: 34, inStoke: 4 },
+];
+export const FinancialData = [
+  { Month: 'January', Total: '12k' },
+  { Month: 'February', Total: '16k' },
+  { Month: 'March', Total: '13k' },
+  { Month: 'April', Total: '12k' },
+  { Month: 'May', Total: '18k' },
+  { Month: 'June', Total: '17k' },
+  { Month: 'July', Total: '16k' },
+  { Month: 'August', Total: '19k' },
+  { Month: 'September', Total: '566k' },
+  { Month: 'October', Total: '122k' },
+  { Month: 'November', Total: '45k' },
+  { Month: 'December', Total: '56k' },
+];
+
+export const FinancialGrids = [
+  {
+    field: 'Month',
+    headerText: 'Month',
+  },
+  { field: 'Total', headerText: 'Total' },
+];
+export const PieGrides = [
+  {
+    field: 'store',
+    headerText: 'Storage',
+  },
+  { field: 'Rate', headerText: 'currentPrice' },
+  { field: 'inStoke', headerText: 'InStoke' },
+];
+export const bargrid = [
+  {
+    field: 'state',
+    headerText: 'States',
+  },
+  { field: 'literacyRate', headerText: 'LiteracyRate' },
+  { field: 'year', headerText: 'Year' },
 ];
 
 export const ecomPieChartData = [

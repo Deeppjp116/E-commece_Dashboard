@@ -13,15 +13,15 @@ import {
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
 
-import { inflationRates, inflationRatesGrid } from '../data/dummy';
-import { Button, Header } from '../components';
+import { FinancialData, FinancialGrids } from '../../data/dummy';
+import Button from '../Button';
 
-const LineTable = () => {
+const Financialgrid = () => {
   return (
     <div className='bg-white rounded-3xl'>
       <div className='flex justify-between'>
         <Button
-          data={inflationRates}
+          data={FinancialData}
           bgColor={{ r: 50, g: 205, b: 50 }}
           text='Download Report'
           exclassName='mt-3 mb-3'
@@ -32,7 +32,7 @@ const LineTable = () => {
 
       <GridComponent
         id='gridcomp'
-        dataSource={inflationRates}
+        dataSource={FinancialData}
         allowPaging
         allowSorting
         allowFiltering
@@ -44,7 +44,7 @@ const LineTable = () => {
         }}
       >
         <ColumnsDirective>
-          {inflationRatesGrid.map((item, index) => {
+          {FinancialGrids.map((item, index) => {
             return <ColumnDirective key={index} {...item} width='auto' />;
           })}
         </ColumnsDirective>
@@ -54,4 +54,4 @@ const LineTable = () => {
   );
 };
 
-export default LineTable;
+export default Financialgrid;

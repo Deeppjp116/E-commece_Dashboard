@@ -3,46 +3,43 @@ import {
   GridComponent,
   ColumnDirective,
   ColumnsDirective,
-  Resize,
-  Sort,
-  ContextMenu,
-  Filter,
+  Search,
+  Selection,
   Page,
   Edit,
-  Toolbar,
   Inject,
+  Sort,
+  Filter,
+  Toolbar,
 } from '@syncfusion/ej2-react-grids';
 
-import { ordersData, ordersGrid } from '../data/dummy';
+import { BillingGrid } from '../data/dummy';
 import { Button, Header } from '../components';
-import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
-const Orders = () => {
-  const [orders, setOrders] = useState([]);
-  const { data, loading, error } = useSelector((state) => state.order);
+const products = () => {
+  const [billingdata, setbillingdata] = useState([]);
 
   useEffect(() => {
+    // Fetch data when the component mounts
     axios
-      .get('http://localhost:9999/orders')
-      .then((response) => setOrders(response.data))
+      .get('http://localhost:9999/products')
+      .then((response) => {
+        const newdata = response.data;
+        console.log(newdata);
+        setbillingdata(newdata);
+      })
       .catch((error) => console.error('Error fetching data:', error));
-    console.log(orders);
+    console.log(billingdata);
   }, []);
-
-  const editOptions = {
-    allowEditing: true,
-    allowAdding: true,
-    allowDeleting: true,
-  };
-  const toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
 
   return (
     <div className='m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl'>
       <div className='flex justify-between'>
-        <Header category='page' title='Orders' />
+        {console.log(billingdata)}
+        <Header category='page' title='Billing' />
         <Button
-          data={ordersData}
+          // data={BillingData}
           bgColor={{ r: 50, g: 205, b: 50 }}
           text='Download Report'
           exclassName='mt-3 mb-3'
@@ -53,25 +50,29 @@ const Orders = () => {
 
       <GridComponent
         id='gridcomp'
-        dataSource={orders}
-        editSettings={editOptions}
-        toolbar={toolbarOptions}
-        allowGrouping
+        dataSource={billingdata}
         allowPaging
         allowSorting
         allowFiltering
+        toolbar={['Search', 'Delete', 'add', 'Edit']}
+        editSettings={{
+          
+          editOptions: true,
+          allowDeleting: true,
+          allowAdding: true,
+        }}
       >
         <ColumnsDirective>
-          {ordersGrid.map((item, index) => {
+          {BillingGrid.map((item, index) => {
             return <ColumnDirective key={index} {...item} />;
           })}
         </ColumnsDirective>
         <Inject
-          services={[Resize, Sort, ContextMenu, Filter, Page, Edit, Toolbar]}
+          services={[Page, Search, Sort, Filter, Toolbar, Selection, Edit]}
         />
       </GridComponent>
     </div>
   );
 };
 
-export default Orders;
+export default products;

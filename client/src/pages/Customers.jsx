@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   GridComponent,
   ColumnDirective,
@@ -13,16 +14,28 @@ import {
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
 
-import { customersData, customersGrid } from '../data/dummy';
+import { customersGrid } from '../data/dummy';
 import { Button, Header } from '../components';
+import { format } from 'date-fns';
 
 const Customers = () => {
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    // Fetch data when the component mounts
+    axios
+      .get('http://localhost:9999/customers')
+      .then((response) => setCustomers(response.data))
+      .catch((error) => console.error('Error fetching data:', error));
+    console.log(customers);
+  }, []);
+
   return (
     <div className='m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl'>
       <div className='flex justify-between'>
         <Header category='page' title='Customers' />
         <Button
-          data={customersData}
+          data={customers}
           bgColor={{ r: 50, g: 205, b: 50 }}
           text='Download Report'
           exclassName='mt-3 mb-3'
@@ -33,7 +46,7 @@ const Customers = () => {
 
       <GridComponent
         id='gridcomp'
-        dataSource={customersData}
+        dataSource={customers}
         allowPaging
         allowSorting
         allowFiltering

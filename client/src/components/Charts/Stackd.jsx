@@ -12,7 +12,7 @@ import {
 // Import your required dependencies here
 
 import { stackedCustomSeriess } from '../../data/dummy';
-import { Header } from '../../components';
+import { Header } from '..';
 function Stacked() {
   const primaryxAxis = { valueType: 'Category', title: 'Months' };
   const primaryyAxis = {

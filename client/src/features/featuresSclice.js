@@ -1,25 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialStates = {
-  chat: false,
-  cart: false,
-  userProfile: false,
-  notification: false,
-};
-
 export const featuresSclice = createSlice({
   name: 'feature',
   initialState: {
-    ...initialStates,
     currentMode: 'Light',
     currentColor: '#79afd4',
-    isClicked: initialStates,
+    userProfileclick: false,
     activeMenu: true,
     screenSize: undefined,
     themeSettings: false,
     sidebar: true,
+    userProfile: 'Deep',
   },
   reducers: {
+    setUserName: (state, action) => {
+      state.userProfile = action.payload;
+    },
     setThemeSettings: (state, action) => {
       state.themeSettings = action.payload;
     },
@@ -38,7 +34,7 @@ export const featuresSclice = createSlice({
       localStorage.setItem('ColorMode', action.payload);
     },
     handleClick: (state, action) => {
-      state.isClicked = { ...initialStates, [action.payload]: true };
+      state.userProfileclick = action.payload;
     },
     setsidebar: (state, action) => {
       state.sidebar = action.payload;
@@ -49,10 +45,11 @@ export const featuresSclice = createSlice({
 export const selectfeature = (state) => state.freautre.currentColor;
 export const selectTheme = (state) => state.freautre.themeSettings;
 export const selectMenu = (state) => state.freautre.activeMenu;
-export const selectClick = (state) => state.freautre.isClicked;
+export const selectClick = (state) => state.freautre.userProfileclick;
 export const selectscreenSize = (state) => state.freautre.screenSize;
 export const selectMode = (state) => state.freautre.currentMode;
 export const sideani = (state) => state.freautre.sidebar;
+export const UserProfilename = (state) => state.freautre.userProfile;
 
 export const {
   setsidebar,
@@ -61,6 +58,7 @@ export const {
   setColor,
   setMode,
   setMenu,
+  setUserName,
   setscreenSize,
 } = featuresSclice.actions;
 

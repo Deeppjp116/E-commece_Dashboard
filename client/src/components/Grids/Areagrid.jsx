@@ -13,16 +13,16 @@ import {
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
 
-import { BillingData, BillingGrid } from '../data/dummy';
-import { Button, Header } from '../components';
+import { inflationRates, inflationRatesGrid } from '../../data/dummy';
+import Header from '../Header';
+import Button from '../Button';
 
-const Customers = () => {
+const AreaGrid = () => {
   return (
-    <div className='m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl'>
+    <div className='bg-white rounded-3xl'>
       <div className='flex justify-between'>
-        <Header category='page' title='Billing' />
         <Button
-          data={BillingData}
+          data={inflationRates}
           bgColor={{ r: 50, g: 205, b: 50 }}
           text='Download Report'
           exclassName='mt-3 mb-3'
@@ -33,7 +33,7 @@ const Customers = () => {
 
       <GridComponent
         id='gridcomp'
-        dataSource={BillingData}
+        dataSource={inflationRates}
         allowPaging
         allowSorting
         allowFiltering
@@ -45,16 +45,14 @@ const Customers = () => {
         }}
       >
         <ColumnsDirective>
-          {BillingGrid.map((item, index) => {
-            return <ColumnDirective key={index} {...item} />;
+          {inflationRatesGrid.map((item, index) => {
+            return <ColumnDirective key={index} {...item} width='auto' />;
           })}
         </ColumnsDirective>
-        <Inject
-          services={[Page, Search, Sort, Filter, Toolbar, Selection, Edit]}
-        />
+        <Inject services={[Search, Sort, Filter, Toolbar, Selection, Edit]} />
       </GridComponent>
     </div>
   );
 };
 
-export default Customers;
+export default AreaGrid;

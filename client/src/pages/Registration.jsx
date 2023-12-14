@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import { setUserName } from '../features/featuresSclice';
+import { useDispatch } from 'react-redux';
 function Registration() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [gettingData, setgettingData] = useState({});
   const [showAlert, setShowAlert] = useState(false);
@@ -40,6 +43,8 @@ function Registration() {
       console.error(error);
     }
   };
+
+  dispatch(setUserName(formData.username));
 
   return (
     <div className=' from-blue-400 to-purple-500 flex justify-center items-center h-screen bg-login-pattern bg-center bg-no-repeat bg-cover'>

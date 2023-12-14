@@ -10,6 +10,7 @@ import {
 } from '@syncfusion/ej2-react-charts';
 import { Header } from '../../components';
 import { BubbleData } from '../../data/dummy';
+import Bargrid from '../../components/Grids/Bargrid';
 function Bar() {
   const primaryxAxis = {
     title: 'Literacy Rate',
@@ -45,6 +46,7 @@ function Bar() {
           ></SeriesDirective>
         </SeriesCollectionDirective>
       </ChartComponent>
+      <Bargrid />
     </div>
   );
 }

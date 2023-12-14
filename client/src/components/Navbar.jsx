@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { FiShoppingCart } from 'react-icons/fi';
-import { BsChatLeft } from 'react-icons/bs';
-import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import avatar from '../data/avatar.jpg';
-import { Cart, Chat, Notification, Sidebar, UserProfile } from '.';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectfeature,
@@ -16,9 +12,8 @@ import {
   selectClick,
   setscreenSize,
   selectscreenSize,
-  sideani,
-  setsidebar,
   selectMenu,
+  UserProfilename,
 } from '../features/featuresSclice';
 import { NavLink } from 'react-router-dom';
 
@@ -51,9 +46,9 @@ const Navbar = () => {
 
   const color = useSelector(selectfeature);
 
-  const isClicked = useSelector(selectClick);
   const screenSize = useSelector(selectscreenSize);
   const setselectMenu = useSelector(selectMenu);
+  const username = useSelector(UserProfilename);
 
   const dispatch = useDispatch();
 
@@ -85,26 +80,6 @@ const Navbar = () => {
           icon={<AiOutlineMenu />}
         />
         <div className='flex'>
-          <NavButton
-            title='Cart'
-            customFunc={() => toggleHandelClick('cart')}
-            color={color}
-            icon={<FiShoppingCart />}
-          />
-          <NavButton
-            title='Chat'
-            dotColor='#03C9D7'
-            customFunc={() => toggleHandelClick('chat')}
-            color={color}
-            icon={<BsChatLeft />}
-          />
-          <NavButton
-            title='Notification'
-            dotColor='rgb(254, 201, 15)'
-            customFunc={() => toggleHandelClick('notification')}
-            color={color}
-            icon={<RiNotification3Line />}
-          />
           <TooltipComponent content='Profile' position='BottomCenter'>
             <div
               className='flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg'
@@ -118,17 +93,12 @@ const Navbar = () => {
               <p>
                 <span className='text-gray-400 text-14'>Hi,</span>{' '}
                 <span className='text-gray-400 font-bold ml-1 text-14'>
-                  Deep
+                  {username}
                 </span>
               </p>
               <MdKeyboardArrowDown className='text-gray-400 text-14' />
             </div>
           </TooltipComponent>
-
-          {isClicked.cart && <Cart />}
-          {isClicked.chat && <Chat />}
-          {isClicked.notification && <Notification />}
-          {isClicked.userProfile && <UserProfile />}
 
           <NavLink
             to='/auth0/login'

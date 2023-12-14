@@ -25,7 +25,7 @@ import {
   ColorMapping,
   Login,
   Registration,
-  Billing,
+  Products,
 } from './pages';
 
 import { Provider, useDispatch, useSelector } from 'react-redux';
@@ -108,9 +108,9 @@ const App = () => {
                   <Route path='/colormapping' element={<ColorMapping />} />
                   <Route path='/pyramid' element={<Pyramid />} />
                   <Route path='/stacked' element={<Stacked />} />
-                  <Route path='/billing' element={<Billing />} />
+                  <Route path='/products' element={<Products />} />
 
-                  <Route path='/auth0/login' element={<Login />} />
+                  <Route path='/auth0/login/:userId' element={<Login />} />
                   <Route
                     path='/auth0/registration'
                     element={<Registration />}

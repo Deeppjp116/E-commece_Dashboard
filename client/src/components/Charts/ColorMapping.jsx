@@ -9,7 +9,7 @@ import {
   DataLabel,
   HistogramSeries,
 } from '@syncfusion/ej2-react-charts';
-
+import ColorMapingGride from '../../components/Grids/ColorMapingGride';
 import { colorMappingData } from '../../data/dummy';
 import { Header } from '../../components';
 const ColorMaping = () => {
@@ -39,7 +39,7 @@ const ColorMaping = () => {
   return (
     <>
       <div className='m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl w-full'>
-        <Header category='Chart' title='Cmpition of Marketing' />
+        <Header category='Chart' title='Compition of Marketing' />
         <ChartComponent
           primaryXAxis={primaryxAxis}
           primaryYAxis={primaryyAxis}
@@ -65,6 +65,7 @@ const ColorMaping = () => {
           </SeriesCollectionDirective>
         </ChartComponent>
       </div>
+      <ColorMapingGride />
     </>
   );
 };

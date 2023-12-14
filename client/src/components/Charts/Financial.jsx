@@ -8,7 +8,7 @@ import {
   Category,
   Tooltip,
 } from '@syncfusion/ej2-react-charts';
-
+import Financialgrid from '../../components/Grids/Financial';
 import { Polardata } from '../../data/dummy';
 import { Header } from '../../components';
 const Financial = () => {
@@ -26,7 +26,7 @@ const Financial = () => {
   };
   return (
     <div className='m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl '>
-      <Header category='Chart' title='Ificiency of oil-fired power' />
+      <Header category='Chart' title='Sales/Months' />
       <ChartComponent
         id='Polar-charts'
         primaryXAxis={primaryxAxis}
@@ -46,6 +46,7 @@ const Financial = () => {
           ></SeriesDirective>
         </SeriesCollectionDirective>
       </ChartComponent>
+      <Financialgrid />
     </div>
   );
 };
