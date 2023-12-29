@@ -1,20 +1,39 @@
-import React from 'react';
-import { BsCurrencyRupee } from 'react-icons/bs';
+import React, { useEffect, useState } from 'react';
+import { BsBoxSeam, BsCurrencyRupee } from 'react-icons/bs';
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot';
 import { Stacked, Pie, Button, SparkLine } from '../components';
 
-import {
-  earningData,
-  SparklineAreaData,
-  ecomPieChartData,
-  salesData,
-} from '../data/dummy';
+import { SparklineAreaData, ecomPieChartData, salesData } from '../data/dummy';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectfeature } from '../features/featuresSclice';
+import productdata, { totalProductsdata } from '../features/productdata';
+import { MdOutlineSupervisorAccount } from 'react-icons/md';
+import { HiOutlineRefresh } from 'react-icons/hi';
+import { FiBarChart } from 'react-icons/fi';
+import { selectcustomers } from '../features/customerdatamodle';
+import { selectsalesdata } from '../features/salesdatamodle';
+import axios from 'axios';
 
 const Ecommerce = () => {
+  const totalProducts = useSelector(totalProductsdata);
   const currentColor = useSelector(selectfeature);
+  const customersdata = useSelector(selectcustomers);
+  const sales = useSelector(selectsalesdata);
+
+  const [sparklinedata, setsparklinedata] = useState([]);
+
+  useEffect(() => {
+    // Fetch data when the component mounts
+    axios
+      .get('http://localhost:9999/ecommerce')
+      .then((response) => {
+        const newdata = response.data;
+        setsparklinedata(newdata);
+        console.log(response.data);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
 
   return (
     <div className='container mx-auto pt-10'>
@@ -39,33 +58,90 @@ const Ecommerce = () => {
           </div>
         </div>
         <div className='grid grid-cols-2 gap-6'>
-          {earningData.map((item) => (
-            <div
-              key={item.title}
-              className='bg-white dark:bg-secondary-dark-bg text-gray-700 p-4 rounded-lg shadow-md'
-            >
-              <div className='flex items-center justify-between'>
-                <div>
-                  <div className='bg-white text-3xl w-12 h-12 flex items-center justify-center rounded-full'>
-                    <span
-                      style={{
-                        color: item.iconColor,
-                        backgroundColor: item.iconBg,
-                      }}
-                      className='rounded-full p-3'
-                    >
-                      {item.icon}
-                    </span>
-                  </div>
-                  <p className='text-2xl font-semibold mt-4'>{item.amount}</p>
+          <div className='bg-white dark:bg-secondary-dark-bg text-gray-700 p-4 rounded-lg shadow-md'>
+            <div className='flex items-center justify-between'>
+              <div>
+                <div className='bg-white text-3xl w-12 h-12 flex items-center justify-center rounded-full'>
+                  <span
+                    style={{
+                      color: '#03C9D7',
+                      backgroundColor: '#E5FAFB',
+                    }}
+                    className='rounded-full p-3'
+                  >
+                    {<MdOutlineSupervisorAccount />}
+                  </span>
                 </div>
-                <p className={`text-xl text-${item.pcColor}`}>
-                  {item.percentage}
+                <p className='text-2xl font-semibold mt-4'>
+                  {customersdata.length}
                 </p>
               </div>
-              <p className='text-lg mt-2'>{item.title}</p>
+              <p className={`text-xl text-red-600`}>-4%</p>
             </div>
-          ))}
+            <p className='text-lg mt-2'>Customers</p>
+          </div>
+          <div className='bg-white dark:bg-secondary-dark-bg text-gray-700 p-4 rounded-lg shadow-md'>
+            <div className='flex items-center justify-between'>
+              <div>
+                <div className='bg-white text-3xl w-12 h-12 flex items-center justify-center rounded-full'>
+                  <span
+                    style={{
+                      color: 'rgb(255, 244, 229)',
+                      backgroundColor: 'rgb(254, 201, 15)',
+                    }}
+                    className='rounded-full p-3'
+                  >
+                    {<BsBoxSeam />}
+                  </span>
+                </div>
+                <p className='text-2xl font-semibold mt-4'>
+                  {totalProducts.length}
+                </p>
+              </div>
+              <p className={`text-xl text-green-600`}>+23%</p>
+            </div>
+            <p className='text-lg mt-2'>Products</p>
+          </div>
+          <div className='bg-white dark:bg-secondary-dark-bg text-gray-700 p-4 rounded-lg shadow-md'>
+            <div className='flex items-center justify-between'>
+              <div>
+                <div className='bg-white text-3xl w-12 h-12 flex items-center justify-center rounded-full'>
+                  <span
+                    style={{
+                      color: 'rgb(0, 194, 146)',
+                      backgroundColor: 'rgb(235, 250, 242)',
+                    }}
+                    className='rounded-full p-3'
+                  >
+                    <HiOutlineRefresh />
+                  </span>
+                </div>
+                <p className='text-2xl font-semibold mt-4'>5677</p>
+              </div>
+              <p className={`text-xl text-red-600`}>-12%</p>
+            </div>
+            <p className='text-lg mt-2'>Refunds</p>
+          </div>
+          <div className='bg-white dark:bg-secondary-dark-bg text-gray-700 p-4 rounded-lg shadow-md'>
+            <div className='flex items-center justify-between'>
+              <div>
+                <div className='bg-white text-3xl w-12 h-12 flex items-center justify-center rounded-full'>
+                  <span
+                    style={{
+                      color: 'rgb(228, 106, 118)',
+                      backgroundColor: 'rgb(255, 244, 229)',
+                    }}
+                    className='rounded-full p-3'
+                  >
+                    <FiBarChart />
+                  </span>
+                </div>
+                <p className='text-2xl font-semibold mt-4'>{sales.length}</p>
+              </div>
+              <p className={`text-xl text-green-600`}>+38%</p>
+            </div>
+            <p className='text-lg mt-2'>Sales</p>
+          </div>
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10'>

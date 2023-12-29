@@ -110,7 +110,7 @@ const App = () => {
                   <Route path='/stacked' element={<Stacked />} />
                   <Route path='/products' element={<Products />} />
 
-                  <Route path='/auth0/login/:userId' element={<Login />} />
+                  <Route path='/auth0/login' element={<Login />} />
                   <Route
                     path='/auth0/registration'
                     element={<Registration />}

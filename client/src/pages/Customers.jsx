@@ -17,17 +17,22 @@ import {
 import { customersGrid } from '../data/dummy';
 import { Button, Header } from '../components';
 import { format } from 'date-fns';
+import { useDispatch } from 'react-redux';
+import { setcustomerdata } from '../features/customerdatamodle';
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // Fetch data when the component mounts
     axios
       .get('http://localhost:9999/customers')
-      .then((response) => setCustomers(response.data))
+      .then((response) => {
+        setCustomers(response.data);
+        dispatch(setcustomerdata(response.data));
+        console.log(response.data);
+      })
       .catch((error) => console.error('Error fetching data:', error));
-    console.log(customers);
   }, []);
 
   return (

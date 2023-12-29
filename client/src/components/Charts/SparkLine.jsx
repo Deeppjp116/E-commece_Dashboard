@@ -28,8 +28,8 @@ const SparkLine = ({ currentColor, id, type, height, width, data, color }) => {
       }}
       markerSettings={{ visible: ['All'], size: 3.5, fill: currentColor }}
     >
-      {console.log(data)}
-      {console.log(data.x)}
+      {/* {console.log(data)}
+      {console.log(data.x)} */}
       <Inject services={[SparklineTooltip]} />
     </SparklineComponent>
   );

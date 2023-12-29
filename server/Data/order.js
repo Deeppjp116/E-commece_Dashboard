@@ -12,8 +12,8 @@ const OrderData = [
     StatusBg: '#ff0000',
     products: [
       ProductData[0].ProductId,
-      // ProductData[1].ProductId,
-      // ProductData[2].ProductId,
+      ProductData[1].ProductId,
+      ProductData[2].ProductId,
     ],
   },
 
@@ -252,81 +252,3 @@ const OrderData = [
 ];
 
 module.exports = OrderData;
-
-// Function to generate dummy product data with various descriptions and categories
-// const generateDummyProduct = () => {
-//   const location = [
-//     'Mumbai',
-//     'Delhi',
-//     'Bangalore',
-//     'Hyderabad',
-//     'Chennai',
-//     'Kolkata',
-//     'Ahmedabad',
-//     'Pune',
-//     'Jaipur',
-//     'Lucknow',
-//     'Kanpur',
-//     'Nagpur',
-//     'Indore',
-//     'Thane',
-//     'Bhopal',
-//     'Visakhapatnam',
-//     'Patna',
-//     'Vadodara',
-//     'Ghaziabad',
-//     'Ludhiana',
-//   ];
-//   const names = [
-//     'Aarav',
-//     'Sanya',
-//     'Arjun',
-//     'Ishita',
-//     'Rohan',
-//     'Anaya',
-//     'Karan',
-//     'Meera',
-//     'Vikram',
-//     'Neha',
-//   ];
-//   pembomproducts = [
-//     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-//     22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-//     41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-//   ];
-//   return {
-//     CustomerName: names[Math.floor(Math.random() * names.length)],
-//     OrderID: new ObjectId(),
-//     TotalAmount: Math.random() * (500.0 - 10.0) + 10.0,
-//     Location: location[Math.floor(Math.random() * location.length)],
-//     Status: getRandomStatus(),
-//     StatusBg: getStatusColor(getRandomStatus()),
-//     products: [
-//       ProductData[Math.floor(Math.random() * pembomproducts.length)].ProductId,
-//       ProductData[Math.floor(Math.random() * pembomproducts.length)].ProductId,
-//       ProductData[Math.floor(Math.random() * pembomproducts.length)].ProductId,
-//     ],
-//   };
-// };
-
-// function getStatusColor(status) {
-//   switch (status) {
-//     case 'Pending':
-//       return '#ff0000'; // Red
-//     case 'Shipped':
-//       return '#ffa500'; // Orange
-//     case 'Delivered':
-//       return '#0000ff'; // Blue
-//     default:
-//       return '#808080'; // Default color if status is not recognized (Gray)
-//   }
-// }
-
-// function getRandomStatus() {
-//   const statusOptions = ['Pending', 'Shipped', 'Delivered'];
-//   const randomIndex = Math.floor(Math.random() * statusOptions.length);
-//   return statusOptions[randomIndex];
-// }
-
-// const pummyProducts = Array.from({ length: 50 }, () => generateDummyProduct());
-// console.log(pummyProducts);

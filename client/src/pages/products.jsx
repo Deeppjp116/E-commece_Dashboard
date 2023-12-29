@@ -16,8 +16,11 @@ import {
 import { BillingGrid } from '../data/dummy';
 import { Button, Header } from '../components';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setProducts } from '../features/productdata';
 
-const products = () => {
+const Products = () => {
+  const dispatch = useDispatch();
   const [billingdata, setbillingdata] = useState([]);
 
   useEffect(() => {
@@ -26,17 +29,16 @@ const products = () => {
       .get('http://localhost:9999/products')
       .then((response) => {
         const newdata = response.data;
-        console.log(newdata);
         setbillingdata(newdata);
+        dispatch(setProducts(response.data));
+        console.log(response.data);
       })
       .catch((error) => console.error('Error fetching data:', error));
-    console.log(billingdata);
   }, []);
 
   return (
     <div className='m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl'>
       <div className='flex justify-between'>
-        {console.log(billingdata)}
         <Header category='page' title='Billing' />
         <Button
           // data={BillingData}
@@ -56,7 +58,6 @@ const products = () => {
         allowFiltering
         toolbar={['Search', 'Delete', 'add', 'Edit']}
         editSettings={{
-          
           editOptions: true,
           allowDeleting: true,
           allowAdding: true,
@@ -75,4 +76,4 @@ const products = () => {
   );
 };
 
-export default products;
+export default Products;

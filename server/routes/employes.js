@@ -1,13 +1,13 @@
 // File: routes/generalRoutes.js
 const express = require('express');
+const Employee = require('../Schemas/employeeModel');
 const router = express.Router();
-const Customer = require('../Schemas/customerModel');
 
 router.get('/', async (req, res) => {
   try {
-    const customers = await Customer.find();
-    res.json(customers);
-    // console.log(customers);
+    const employeesdata = await Employee.find();
+    console.log(employeesdata);
+    res.send(employeesdata);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
     console.log(error);

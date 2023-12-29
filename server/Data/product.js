@@ -1,25 +1,4 @@
 const { ObjectId } = require('mongoose').Types;
-
-// const generateRandomRating = () => {
-//   return Math.random() * (5.0 - 3.0) + 3.0;
-// };
-
-// // Function to generate dummy product data
-// const generateDummyProduct = () => {
-//   return {
-//     ProductId: new ObjectId(),
-//     name: 'Product ' + Math.floor(Math.random() * 1000), // Generate a random name
-//     price: Math.random() * (500.0 - 10.0) + 10.0, // Generate a random price between 10.0 and 500.0
-//     description: 'Description for Product',
-//     category: 'Category',
-//     rating: generateRandomRating(),
-//     supply: Math.floor(Math.random() * 100), // Generate a random supply value between 0 and 100
-//   };
-// };
-
-// const dummyProducts = Array.from({ length: 50 }, () => generateDummyProduct());
-// console.log(dummyProducts);
-
 const ProductData = [
   {
     ProductId: new ObjectId(),

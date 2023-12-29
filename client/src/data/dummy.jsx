@@ -94,7 +94,7 @@ const gridEmployeeProfile = (props) => (
 const gridEmployeeCountry = (props) => (
   <div className='flex items-center justify-center gap-2'>
     <GrLocation />
-    <span>{props.Country}</span>
+    <span>{props.State}</span>
   </div>
 );
 export const EditorData = () => (
@@ -653,12 +653,10 @@ export const customersGrid = [
 
 export const employeesGrid = [
   {
-    headerText: 'Employee',
-    width: '150',
-    template: gridEmployeeProfile,
+    field: 'EmployeeName',
+    headerText: 'Employee Name',
     textAlign: 'Center',
   },
-  { field: 'Name', headerText: '', width: '0', textAlign: 'Center' },
   {
     field: 'Title',
     headerText: 'Designation',
@@ -666,7 +664,8 @@ export const employeesGrid = [
     textAlign: 'Center',
   },
   {
-    headerText: 'Country',
+    field: 'State',
+    headerText: 'States',
     width: '120',
     textAlign: 'Center',
     template: gridEmployeeCountry,
@@ -831,46 +830,6 @@ export const chatData = [
     message: 'Jolly completed tasks',
     desc: 'Assign her new tasks',
     time: '1:12 AM',
-  },
-];
-
-export const earningData = [
-  {
-    icon: <MdOutlineSupervisorAccount />,
-    amount: '39,354',
-    percentage: '-4%',
-    title: 'Customers',
-    iconColor: '#03C9D7',
-    iconBg: '#E5FAFB',
-    pcColor: 'red-600',
-  },
-  {
-    icon: <BsBoxSeam />,
-    amount: '4,396',
-    percentage: '+23%',
-    title: 'Products',
-    iconColor: 'rgb(255, 244, 229)',
-    iconBg: 'rgb(254, 201, 15)',
-    pcColor: 'green-600',
-  },
-  {
-    icon: <FiBarChart />,
-    amount: '423,39',
-    percentage: '+38%',
-    title: 'Sales',
-    iconColor: 'rgb(228, 106, 118)',
-    iconBg: 'rgb(255, 244, 229)',
-
-    pcColor: 'green-600',
-  },
-  {
-    icon: <HiOutlineRefresh />,
-    amount: '39,354',
-    percentage: '-12%',
-    title: 'Refunds',
-    iconColor: 'rgb(0, 194, 146)',
-    iconBg: 'rgb(235, 250, 242)',
-    pcColor: 'red-600',
   },
 ];
 
@@ -1118,10 +1077,20 @@ export const ordersGrid = [
     textAlign: 'Center',
   },
   {
-    field: 'products',
-    headerText: 'Products ID',
+    field: 'name',
+    headerText: 'Products',
     width: '150',
     textAlign: 'Center',
+    template: (data) => {
+      // Assuming 'data.products' is the array of products in your dataset
+      return (
+        <div>
+          {data.products.map((product, index) => (
+            <div key={index}>{product.name}</div>
+          ))}
+        </div>
+      );
+    },
   },
 ];
 
@@ -3379,7 +3348,15 @@ export const stackedChartData = [
 
 export const stackedCustomSeries = [
   {
-    dataSource: stackedChartData[0],
+    dataSource: [
+      { x: 'Jan', y: 111.1 },
+      { x: 'Feb', y: 127.3 },
+      { x: 'Mar', y: 143.4 },
+      { x: 'Apr', y: 159.9 },
+      { x: 'May', y: 159.9 },
+      { x: 'Jun', y: 159.9 },
+      { x: 'July', y: 159.9 },
+    ],
     xName: 'x',
     yName: 'y',
     name: 'Budget',

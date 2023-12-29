@@ -22,7 +22,7 @@ function Registration() {
     try {
       console.log('Before axios request');
       const response = await axios.post(
-        'http://localhost:3000/auth0/registration',
+        'http://localhost:9999/auth0/registration',
         formData
       );
       console.log('After axios request');

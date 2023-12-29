@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   GridComponent,
   ColumnDirective,
@@ -13,15 +13,28 @@ import {
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
 
-import { inflationRates, inflationRatesGrid } from '../data/dummy';
+import { inflationRatesGrid } from '../data/dummy';
 import { Button, Header } from '../components';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const LineTable = () => {
+  const [inflationdata, setinflationdata] = useState([]);
+  useEffect(() => {
+    axios
+      .get('http://localhost:9999/line')
+      .then((response) => {
+        setinflationdata(response.data);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+    console.log(inflationdata);
+  }, []);
+
   return (
     <div className='bg-white rounded-3xl'>
       <div className='flex justify-between'>
         <Button
-          data={inflationRates}
+          data={inflationdata}
           bgColor={{ r: 50, g: 205, b: 50 }}
           text='Download Report'
           exclassName='mt-3 mb-3'
@@ -32,7 +45,7 @@ const LineTable = () => {
 
       <GridComponent
         id='gridcomp'
-        dataSource={inflationRates}
+        dataSource={inflationdata}
         allowPaging
         allowSorting
         allowFiltering

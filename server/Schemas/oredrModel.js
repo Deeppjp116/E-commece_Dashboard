@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema, ObjectId } = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
   Customer: { type: String, required: true },
@@ -7,7 +8,7 @@ const orderSchema = new mongoose.Schema({
   Location: { type: String, required: true },
   OrderStatus: { type: String, required: true },
   StatusBg: { type: String, required: true },
-  products: { type: Array },
+  products: [{ type: mongoose.Schema.Types.ObjectId, default: new ObjectId() }],
 });
 
 const OrderModel = mongoose.model('Order', orderSchema);

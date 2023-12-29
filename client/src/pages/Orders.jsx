@@ -18,16 +18,23 @@ import { Button, Header } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
+import { setsalesdata } from '../features/salesdatamodle.js';
+
 const Orders = () => {
+  const dispatch = useDispatch();
+
   const [orders, setOrders] = useState([]);
   const { data, loading, error } = useSelector((state) => state.order);
 
   useEffect(() => {
     axios
       .get('http://localhost:9999/orders')
-      .then((response) => setOrders(response.data))
+      .then((response) => {
+        setOrders(response.data);
+        dispatch(setsalesdata(response.data));
+        console.log(response.data);
+      })
       .catch((error) => console.error('Error fetching data:', error));
-    console.log(orders);
   }, []);
 
   const editOptions = {

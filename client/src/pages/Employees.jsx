@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   GridComponent,
   ColumnDirective,
@@ -12,10 +13,22 @@ import {
   Toolbar,
 } from '@syncfusion/ej2-react-grids';
 
-import { employeesData, employeesGrid } from '../data/dummy';
+import { employeesGrid } from '../data/dummy';
 import { Button, Header } from '../components';
 
 const Employees = () => {
+  const [employeesData, setEmployees] = useState([]);
+
+  useEffect(() => {
+    // Fetch data when the component mounts
+    axios
+      .get('http://localhost:9999/employees')
+      .then((response) => {
+        setEmployees(response.data);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+    console.log(employeesData);
+  }, []);
   return (
     <div className='m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl'>
       <div className='flex justify-between'>
