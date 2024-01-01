@@ -3365,7 +3365,15 @@ export const stackedCustomSeries = [
   },
 
   {
-    dataSource: stackedChartData[1],
+    dataSource: [
+      { x: 'Jan', y: 111.1 },
+      { x: 'Feb', y: 127.3 },
+      { x: 'Mar', y: 150.4 },
+      { x: 'Apr', y: 159.9 },
+      { x: 'May', y: 159.9 },
+      { x: 'Jun', y: 159.9 },
+      { x: 'July', y: 159.9 },
+    ],
     xName: 'x',
     yName: 'y',
     name: 'Expense',

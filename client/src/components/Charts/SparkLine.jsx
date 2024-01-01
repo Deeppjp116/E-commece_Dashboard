@@ -5,6 +5,12 @@ import {
 } from '@syncfusion/ej2-react-charts';
 
 const SparkLine = ({ currentColor, id, type, height, width, data, color }) => {
+  const transformedData = data.map((item) => ({
+    x: item.x,
+    xval: item.xval,
+    y: item.y,
+    yval: item.yval,
+  }));
   return (
     <SparklineComponent
       id={id}
@@ -14,7 +20,7 @@ const SparkLine = ({ currentColor, id, type, height, width, data, color }) => {
       valueType='Numeric'
       fill={color}
       border={{ color: currentColor, width: 2 }}
-      dataSource={data}
+      dataSource={transformedData}
       xName='x'
       yName='y'
       type={type}

@@ -10,16 +10,12 @@ import {
   DataLabel,
 } from '@syncfusion/ej2-react-charts';
 
-import {
-  stackedCustomSeries,
-  stackedPrimaryXAxis,
-  stackedPrimaryYAxis,
-} from '../../data/dummy';
+import { stackedPrimaryXAxis, stackedPrimaryYAxis } from '../../data/dummy';
 
 import { useDispatch } from 'react-redux';
 import { selectMode } from '../../features/featuresSclice';
 
-const Stacked = ({ width, height }) => {
+const Stacked = ({ stackedCustomSeries, width, height }) => {
   const currentMode = useDispatch(selectMode);
   return (
     <ChartComponent

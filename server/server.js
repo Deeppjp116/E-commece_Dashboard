@@ -21,7 +21,7 @@ const Employee = require('./Schemas/employeeModel');
 const Line = require('./Schemas/LineModel');
 const linedata = require('./Data/lineData');
 const lines = require('./routes/line');
-const SparklineArea = require('./Schemas/budget');
+const SparklineArea = require('./Schemas/Spakline');
 const sparkline = require('./routes/sparkline');
 const StackedCustomSeriesModel = require('./Schemas/StackShcema');
 
@@ -50,22 +50,26 @@ db.once('open', async () => {
   console.log('Connected to MongoDB');
 
   try {
-    const stackedCustomSeries = {
-      dataSource: [
-        { x: 'Jan', y: 111.1 },
-        { x: 'Feb', y: 127.3 },
-        { x: 'Mar', y: 143.4 },
-        { x: 'Apr', y: 159.9 },
-        { x: 'May', y: 159.9 },
-        { x: 'Jun', y: 159.9 },
-        { x: 'July', y: 159.9 },
-      ],
-      xName: 'x',
-      yName: 'y',
-      name: 'Budget',
-      type: 'StackingColumn',
-      background: 'blue',
-    };
+    // const tempdata = {
+    //   dataSource: [
+    //     { x: 'Jan', y: 111.1 },
+    //     { x: 'Feb', y: 127.3 },
+    //     { x: 'Mar', y: 150.4 },
+    //     { x: 'Apr', y: 159.9 },
+    //     { x: 'May', y: 159.9 },
+    //     { x: 'Jun', y: 159.9 },
+    //     { x: 'July', y: 159.9 },
+    //   ],
+    //   xName: 'x',
+    //   yName: 'y',
+    //   name: 'Expense',
+    //   type: 'StackingColumn',
+    //   background: 'red',
+    // };
+
+    // const stacked = new StackedCustomSeriesModel(tempdata);
+
+    // stacked.save();
 
     // const stakeddata = new StackedCustomSeriesModel(stackedCustomSeries);
 

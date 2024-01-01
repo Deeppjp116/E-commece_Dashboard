@@ -16,21 +16,69 @@ import { selectsalesdata } from '../features/salesdatamodle';
 import axios from 'axios';
 
 const Ecommerce = () => {
+  const [sparklinedata, setsparklinedata] = useState([]);
+  const [Stacknedata, setStacknedata] = useState([]);
+
   const totalProducts = useSelector(totalProductsdata);
   const currentColor = useSelector(selectfeature);
   const customersdata = useSelector(selectcustomers);
   const sales = useSelector(selectsalesdata);
 
-  const [sparklinedata, setsparklinedata] = useState([]);
+  function calculateTotalEarnings(products) {
+    let totalEarnings = 0;
+
+    products.forEach((product) => {
+      totalEarnings += product.price;
+    });
+
+    return totalEarnings;
+  }
+
+  function calculateTotalBudget(data) {
+    let totalExpense = 0;
+
+    console.log(data);
+
+    if (data && data.dataSource) {
+      data.dataSource.forEach((entry) => {
+        totalExpense += entry.y;
+      });
+    }
+    return totalExpense.toFixed(0);
+  }
+
+  const totalBudget = calculateTotalBudget(Stacknedata[0]);
+
+  function calculateTotalExpense(data) {
+    let totalExpense = 0;
+
+    console.log(data);
+
+    if (data && data.dataSource) {
+      data.dataSource.forEach((entry) => {
+        totalExpense += entry.y;
+      });
+    }
+    return totalExpense.toFixed(0);
+  }
+
+  const totalExpense = calculateTotalExpense(Stacknedata[1]);
+
+  console.log(sales);
+
+  console.log(totalExpense);
+  // Calculate total earnings
+  const totalEarnings = calculateTotalEarnings(totalProducts);
 
   useEffect(() => {
     // Fetch data when the component mounts
     axios
       .get('http://localhost:9999/ecommerce')
       .then((response) => {
-        const newdata = response.data;
-        setsparklinedata(newdata);
-        console.log(response.data);
+        setsparklinedata(response.data.sparkline);
+        setStacknedata(response.data.stacked);
+        console.log(response.data.sparkline);
+        console.log(response.data.stacked);
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
@@ -45,10 +93,10 @@ const Ecommerce = () => {
           <div className='flex justify-between items-center'>
             <div>
               <p className='text-4xl font-extrabold text-blue-600'>Earnings</p>
-              <p className='text-5xl font-extrabold'>&#8377;06,112.33</p>
+              <p className='text-5xl font-extrabold'>&#8377; {totalEarnings}</p>
             </div>
             <Button
-              data={salesData}
+              data={sales}
               color='white'
               bgColor={{ r: 50, g: 205, b: 50 }}
               text='Download'
@@ -164,13 +212,13 @@ const Ecommerce = () => {
           <div className='grid grid-cols-2 gap-6 mt-8'>
             <div>
               <p className='text-3xl font-semibold text-green-500'>
-                &#8377;39,693
+                &#8377;{totalBudget}
               </p>
               <p className='text-gray-600 mt-2'>Budget</p>
             </div>
             <div>
               <p className='text-3xl font-semibold text-red-500'>
-                &#8377;1,48,693
+                &#8377;{totalExpense}
               </p>
               <p className='text-gray-600 mt-2'>Expense</p>
             </div>
@@ -182,21 +230,17 @@ const Ecommerce = () => {
               type='Line'
               height='80px'
               width='100%'
-              data={SparklineAreaData}
+              data={sparklinedata}
               color={currentColor}
-            />
-          </div>
-          <div className='mt-10'>
-            <Button
-              color='white'
-              bgColor='bg-blue-500'
-              text='Download Report'
-              borderRadius='10px'
             />
           </div>
         </div>
         <div className='rounded-lg overflow-hidden'>
-          <Stacked width='100%' height='360px' />
+          <Stacked
+            width='100%'
+            stackedCustomSeries={Stacknedata}
+            height='360px'
+          />
         </div>
       </div>
     </div>
