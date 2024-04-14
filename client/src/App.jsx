@@ -4,8 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
+// Importing necessary components
+import { Navbar, Sidebar, ThemeSettings } from './components';
 
+// Importing necessary page components
 import {
   Ecommerce,
   Orders,
@@ -28,8 +30,11 @@ import {
   Products,
 } from './pages';
 
+// Importing Redux hooks and store
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import store from './store/store';
+
+// Importing Redux selectors and actions
 import {
   selectMenu,
   selectMode,
@@ -37,18 +42,24 @@ import {
   selectfeature,
   setThemeSettings,
 } from './features/featuresSclice';
+
+// Importing Maps component
 import Maps from './pages/ColorPicker';
+
 const App = () => {
   const dispatch = useDispatch();
   const themeSettings = useSelector(selectTheme);
   const activeMenu = useSelector(selectMenu);
   const currentColor = useSelector(selectfeature);
   const currentMode = useSelector(selectMode);
+
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
+      {/* Redux store provider */}
       <Provider store={store}>
         <BrowserRouter>
           <div className='flex relative dark:bg-main-dark-bg'>
+            {/* Settings button with tooltip */}
             <div className='fixed right-4 bottom-4' style={{ zIndex: '1000' }}>
               <TooltipComponent content='Settings' position='Top'>
                 <button
@@ -61,6 +72,7 @@ const App = () => {
                 </button>
               </TooltipComponent>
             </div>
+            {/* Sidebar */}
             {activeMenu ? (
               <div className='w-72  fixed sidebar dark:bg-secondary-dark-bg bg-white  '>
                 <Sidebar />
@@ -70,36 +82,35 @@ const App = () => {
                 <Sidebar />
               </div>
             )}
+            {/* Main content */}
             <div
               className={`dark:bg-main-dark-bg  bg-main-bg min-h-screen w-full
             ${activeMenu ? ' md:ml-72 ' : 'flex-2'}`}
             >
+              {/* Navbar */}
               <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar dark:bg-main-dark-bg navbar w-full '>
                 <Navbar />
               </div>
               <div>
+                {/* Theme settings */}
                 {themeSettings && <ThemeSettings />}
 
+                {/* Routes */}
                 <Routes>
-                  {/* Dashboard  */}
+                  {/* Dashboard */}
                   <Route path='/' element={<Ecommerce />} />
                   <Route path='/ecommerce' element={<Ecommerce />} />
-
                   {/* Pages */}
-
                   <Route path='/orders' element={<Orders />} />
                   <Route path='/employees' element={<Employees />} />
                   <Route path='/customers' element={<Customers />} />
-
                   {/* Apps */}
-
                   <Route path='/tasks' element={<Tasks />} />
                   <Route path='/editor' element={<Editor />} />
                   <Route path='/calendar' element={<Calendar />} />
-                  <Route path='/color-picker' element={<Maps />} />
-
+                  <Route path='/Outlets' element={<Maps />} />{' '}
+                  {/* Use the imported Maps component */}
                   {/* Charts */}
-
                   <Route path='/line' element={<Line />} />
                   <Route path='/area' element={<Area />} />
                   <Route path='/bar' element={<Bar />} />
@@ -109,7 +120,7 @@ const App = () => {
                   <Route path='/pyramid' element={<Pyramid />} />
                   <Route path='/stacked' element={<Stacked />} />
                   <Route path='/products' element={<Products />} />
-
+                  {/* Authentication */}
                   <Route path='/auth0/login' element={<Login />} />
                   <Route
                     path='/auth0/registration'

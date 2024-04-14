@@ -33,6 +33,7 @@ let dbURI;
 
 app.use(express.json());
 app.use(cors());
+// app.set('view engine', 'ejs');
 
 app.use('/auth0', authRoutes); // Use the authRoutes for paths starting with /auth
 app.use('/general', generalRoutes); // Use the generalRoutes for paths starting with /general
