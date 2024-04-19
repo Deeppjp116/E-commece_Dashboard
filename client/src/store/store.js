@@ -5,6 +5,7 @@ import orderData from '../features/ordersData';
 import productData from '../features/productdata';
 import customersData from '../features/customerdatamodle';
 import salesData from '../features/salesdatamodle';
+import forgetData from '../features/forgetpassword';
 
 export default configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
     order: orderData,
     product: productData,
     customer: customersData,
-    sales:salesData,
+    sales: salesData,
+    forget: forgetData,
   },
 });

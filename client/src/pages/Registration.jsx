@@ -7,10 +7,14 @@ import { setUserName } from '../features/featuresSclice';
 import { useDispatch } from 'react-redux';
 function Registration() {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
   const [gettingData, setgettingData] = useState({});
   const [showAlert, setShowAlert] = useState(false);
-  const navigate = useNavigate();
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +32,7 @@ function Registration() {
       console.log('After axios request');
       console.log('datasened', response.data);
       setgettingData(response);
-      navigate('/ecommerce');
+    
 
       if (response.data.token) {
         // Store the token in localStorage
@@ -74,6 +78,19 @@ function Registration() {
               type='password'
               id='password'
               name='password'
+              className='w-full px-4 py-2 rounded-md bg-white bg-opacity-25 text-black focus:outline-none focus:bg-opacity-50'
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className='mb-4'>
+            <label htmlFor='password' className='block text-black font-bold'>
+              Email
+            </label>
+            <input
+              type='email'
+              id='email'
+              name='email'
               className='w-full px-4 py-2 rounded-md bg-white bg-opacity-25 text-black focus:outline-none focus:bg-opacity-50'
               onChange={handleChange}
               required

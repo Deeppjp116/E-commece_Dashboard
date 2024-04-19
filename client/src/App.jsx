@@ -38,6 +38,8 @@ import {
   setThemeSettings,
 } from './features/featuresSclice';
 import Maps from './pages/ColorPicker';
+import { ForeignKey } from '@syncfusion/ej2-react-grids';
+import Forget from './pages/Forget';
 const App = () => {
   const dispatch = useDispatch();
   const themeSettings = useSelector(selectTheme);
@@ -114,6 +116,10 @@ const App = () => {
                   <Route
                     path='/auth0/registration'
                     element={<Registration />}
+                  />
+                  <Route
+                    path='/auth0/login/forget-password'
+                    element={<Forget />}
                   />
                 </Routes>
               </div>
