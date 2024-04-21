@@ -24,7 +24,6 @@ const Orders = () => {
   const dispatch = useDispatch();
 
   const [orders, setOrders] = useState([]);
-  const { data, loading, error } = useSelector((state) => state.order);
 
   useEffect(() => {
     axios
@@ -37,10 +36,44 @@ const Orders = () => {
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
+  const handleEdit = async (data) => {
+    const updatedOrder = { ...data.newData[0] }; // Get edited order data
+    const orderId = updatedOrder._id; // Assuming backend uses _id for identification
+    console.log(updatedOrder);
+    try {
+      const response = await axios.put(
+        `http://localhost:9999/orders/${orderId}`,
+        updatedOrder
+      );
+      setOrders(
+        orders.map((order) =>
+          order.id === updatedOrder.id ? response.data : order
+        )
+      );
+      dispatch(updatedOrder(response.data)); // Update Redux state for updated order
+    } catch (error) {
+      console.error('Error updating order:', error);
+      // Handle edit failure (e.g., display error message)
+    }
+  };
+
+  const handleDelete = async (data) => {
+    const orderId = data.actionData[0]._id; // Get order ID for deletion
+    try {
+      await axios.delete(`http://localhost:9999/orders/${orderId}`);
+      setOrders(orders.filter((order) => order.id !== orderId));
+      dispatch(deleteOrder(orderId)); // Update Redux state for deleted order
+    } catch (error) {
+      console.error('Error deleting order:', error);
+      // Handle delete failure (e.g., display error message)
+    }
+  };
+
   const editOptions = {
     allowEditing: true,
-    allowAdding: true,
+    allowAdding: true, // Adjust based on backend support
     allowDeleting: true,
+    mode: 'Batch', // Enable batch editing for efficiency
   };
   const toolbarOptions = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
 
@@ -57,26 +90,29 @@ const Orders = () => {
           borderRadius='10px'
         />
       </div>
-
-      <GridComponent
-        id='gridcomp'
-        dataSource={orders}
-        editSettings={editOptions}
-        toolbar={toolbarOptions}
-        allowGrouping
-        allowPaging
-        allowSorting
-        allowFiltering
-      >
-        <ColumnsDirective>
-          {ordersGrid.map((item, index) => {
-            return <ColumnDirective key={index} {...item} />;
-          })}
-        </ColumnsDirective>
-        <Inject
-          services={[Resize, Sort, ContextMenu, Filter, Page, Edit, Toolbar]}
-        />
-      </GridComponent>
+      {orders.length > 0 && (
+        <GridComponent
+          id='gridcomp'
+          dataSource={orders}
+          editSettings={editOptions}
+          toolbar={toolbarOptions}
+          allowGrouping
+          allowPaging
+          allowSorting
+          allowFiltering
+          onEditComplete={handleEdit} // Call handleEdit on edit completion
+          onDeleteComplete={handleDelete} // Call handleDelete on delete completion
+        >
+          <ColumnsDirective>
+            {ordersGrid.map((item, index) => {
+              return <ColumnDirective key={index} {...item} />;
+            })}
+          </ColumnsDirective>
+          <Inject
+            services={[Resize, Sort, ContextMenu, Filter, Page, Edit, Toolbar]}
+          />
+        </GridComponent>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { BsBoxSeam, BsCurrencyRupee } from 'react-icons/bs';
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot';
-import { Stacked, Pie, Button, SparkLine } from '../components';
+import { Pie, Button, SparkLine } from '../components';
 
 import { SparklineAreaData, ecomPieChartData, salesData } from '../data/dummy';
 
@@ -14,6 +14,8 @@ import { FiBarChart } from 'react-icons/fi';
 import { selectcustomers } from '../features/customerdatamodle';
 import { selectsalesdata } from '../features/salesdatamodle';
 import axios from 'axios';
+
+const Stacked = lazy(() => import('../components/Charts/Stacked')); // Lazy load Stacked component
 
 const Ecommerce = () => {
   const [sparklinedata, setsparklinedata] = useState([]);
@@ -236,11 +238,13 @@ const Ecommerce = () => {
           </div>
         </div>
         <div className='rounded-lg overflow-hidden'>
-          <Stacked
-            width='100%'
-            stackedCustomSeries={Stacknedata}
-            height='360px'
-          />
+          <Suspense fallback={<div>Loading Stacked Chart...</div>}>
+            <Stacked
+              width='100%'
+              stackedCustomSeries={Stacknedata}
+              height='360px'
+            />
+          </Suspense>
         </div>
       </div>
     </div>
